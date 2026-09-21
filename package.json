@@ -1,0 +1,29 @@
+{
+  "name": "excel2json",
+  "version": "1.0.0",
+  "description": "将 Excel 转换为 JSON 的命令行工具（支持注释行/类型行/字段行 与 #include 跨表引用），可构建 macOS / Windows 可执行文件。",
+  "type": "module",
+  "module": "src/index.ts",
+  "bin": {
+    "excel2json": "src/index.ts"
+  },
+  "scripts": {
+    "start": "bun run src/index.ts",
+    "sample": "bun run scripts/sample.ts",
+    "build:mac-arm": "bun build --compile --target=bun-darwin-arm64 src/index.ts --outfile dist/excel2json-darwin-arm64",
+    "build:mac-x64": "bun build --compile --target=bun-darwin-x64 src/index.ts --outfile dist/excel2json-darwin-x64",
+    "build:win-x64": "bun build --compile --target=bun-windows-x64 src/index.ts --outfile dist/excel2json-windows-x64.exe",
+    "build:win-arm": "bun build --compile --target=bun-windows-arm64 src/index.ts --outfile dist/excel2json-windows-arm64.exe",
+    "build:linux-x64": "bun build --compile --target=bun-linux-x64 src/index.ts --outfile dist/excel2json-linux-x64",
+    "build": "bun run build:mac-arm && bun run build:mac-x64 && bun run build:win-x64 && bun run build:win-arm && bun run build:linux-x64",
+    "build:win": "bun run build:win-x64 && bun run build:win-arm",
+    "build:mac": "bun run build:mac-arm && bun run build:mac-x64"
+  },
+  "dependencies": {
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "bun-types": "latest"
+  }
+}
